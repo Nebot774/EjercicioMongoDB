@@ -43,6 +43,13 @@
             <version>1.2.6</version> <!-- Reemplaza con la versión más reciente si es necesario -->
         </dependency>
 
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>4.0.6</version> <!-- Usa la versión más reciente disponible -->
+        </dependency>
+
+
 
     </dependencies>
 

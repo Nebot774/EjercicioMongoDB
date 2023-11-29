@@ -27,9 +27,34 @@ public class Main {
         // Desactivamos los logs de MongoDB
         Logger logger = LoggerFactory.getLogger("org.mongodb.driver");
 
+        //String uri = "mongodb://usuario:password@host:puerto";
+        String url = "mongodb://adria:Secreto!2021@i-0a4894661ff81acb2.compute-1.amazonaws.com:27017";
+         String uri="patata";
+
+
+        try (MongoClient mongoClient = MongoClients.create(url)) {
+            System.out.println("Conexión con MongoClient y CodecRegistry para el trabajo con POJOs");
+
+            // Realizar aquí las operaciones que necesitas en la base de datos
+
+            CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
+            CodecRegistry pojoCodecRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
+
+            MongoDatabase database = mongoClient.getDatabase("f1-2006").withCodecRegistry(pojoCodecRegistry);
+            MongoCollection<Driver> collection = database.getCollection("drivers", Driver.class);
 
 
 
 
-    }
+            // Si llegamos aquí, la conexión fue exitosa
+            System.out.println("Conexión exitosa a la base de datos.");
+        } catch (Exception e) {
+            // Manejo de excepciones en caso de error de conexión
+            System.err.println("Error al conectar a la base de datos: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+
+
+        }
 }
