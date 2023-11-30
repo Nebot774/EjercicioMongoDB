@@ -16,11 +16,7 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>bson</artifactId>
-            <version>4.11.1</version>
-        </dependency>
+
 
 
         <dependency>

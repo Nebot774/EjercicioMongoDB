@@ -41,9 +41,10 @@ public class OperacionesCRUDPilotos {
     }
 
 
-    public void BorrarDriver(Driver driver) {
-        collection.deleteOne(Filters.eq("driverid", driver.getDriverid()));
+    public void BorrarDriver(String code) {
+        collection.deleteMany(Filters.eq("code", code));
     }
+
 
 
     //metodos adicionales
