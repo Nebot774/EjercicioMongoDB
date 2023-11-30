@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>bson</artifactId>
-            <version>4.2.3</version> <!-- Verifica si hay una versión más reciente -->
+            <version>4.11.1</version>
         </dependency>
 
 
@@ -43,11 +43,6 @@
             <version>1.2.6</version> <!-- Reemplaza con la versión más reciente si es necesario -->
         </dependency>
 
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver-sync</artifactId>
-            <version>4.0.6</version> <!-- Usa la versión más reciente disponible -->
-        </dependency>
 
 
 

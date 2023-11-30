@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,23 +29,45 @@ public class Main {
         Logger logger = LoggerFactory.getLogger("org.mongodb.driver");
 
         //String uri = "mongodb://usuario:password@host:puerto";
-        String url = "mongodb://adria:Secreto!2021@i-0a4894661ff81acb2.compute-1.amazonaws.com:27017";
-         String uri="patata";
+        String url = "mongodb://AdminAlejandro:Secreto!2023@3.226.27.197:27017";
+        String uri="patata";
 
 
         try (MongoClient mongoClient = MongoClients.create(url)) {
             System.out.println("Conexión con MongoClient y CodecRegistry para el trabajo con POJOs");
 
-            // Realizar aquí las operaciones que necesitas en la base de datos
 
             CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
             CodecRegistry pojoCodecRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
 
+            //establecemos contacto con la base de datos de formula 1
             MongoDatabase database = mongoClient.getDatabase("f1-2006").withCodecRegistry(pojoCodecRegistry);
             MongoCollection<Driver> collection = database.getCollection("drivers", Driver.class);
 
 
+            // Crear una instancia de OperacionesCRUDDriver
+            OperacionesCRUDPilotos operaciones = new  OperacionesCRUDPilotos(database);
 
+            // Ejemplo de creación de un piloto
+            Driver nuevoDriver = new Driver(/* establece los datos del piloto aquí */);
+            operaciones.CrearDriver(nuevoDriver);
+
+            // Leer un piloto específico
+            Driver driverLeido = operaciones.LeerDriver(123); // reemplaza 123 con un driverId real
+
+            // Leer todos los pilotos
+            List<Driver> todosLosDrivers = operaciones.LeerDrivers();
+
+            // Actualizar un piloto
+           // Driver driverParaActualizar = /* obtén o crea un objeto Driver con datos actualizados */;
+           // operaciones.ActualizarDriver(driverParaActualizar);
+
+            // Borrar un piloto
+            operaciones.BorrarDriver(driverLeido); // asumiendo que driverLeido es el que quieres borrar
+
+            //Llamada a metodos
+            operaciones.MostrarPilotosOrdenadosPorEdadDescendente();
+            operaciones.MostrarPilotosConEdadMayorQue(30);
 
             // Si llegamos aquí, la conexión fue exitosa
             System.out.println("Conexión exitosa a la base de datos.");
